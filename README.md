@@ -14,5 +14,5 @@ If you are developing a production application, we recommend using TypeScript an
 ## How to run the codes
 
 open the terminal
-Type npm install
+Type npm install and then
 npm start
