@@ -1,0 +1,116 @@
+/* Reset Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+/* Main App Container */
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #121212;
+  color: white;
+  padding: 20px;
+}
+
+/* Title */
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Search Bar */
+.search {
+  display: flex;
+  align-items: center;
+  background: #222;
+  padding: 10px;
+  border-radius: 8px;
+  width: 400px;
+  gap: 10px;
+}
+
+.search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.search img {
+  width: 24px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.search img:hover {
+  transform: scale(1.1);
+}
+
+/* Layout: Movies & Watchlist */
+.main-container {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* Movies Section */
+.movies-container {
+  flex: 3;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Watchlist Section */
+.watchlist {
+  flex: 1;
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 8px;
+  min-height: 400px;
+}
+
+.watchlist h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Movie Cards */
+.movie-card {
+  background: #222;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.movie-card button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  background: #ff9800;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.movie-card button:hover {
+  background: #e68900;
+}
