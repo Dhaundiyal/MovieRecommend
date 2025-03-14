@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import "./App.css";
 import MovieCard from "./MovieCard";
+import Watchlist from "./Watchlist"; // Import Watchlist Page
 import SearchIcon from "./search.svg";
 
-const API_URL = "https://www.omdbapi.com/?apikey=YOUR_API_KEY";
+const API_URL = "https://www.omdbapi.com/?apikey=8f9d36fc";
 
 const App = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -12,6 +14,8 @@ const App = () => {
 
     useEffect(() => {
         searchMovies("Avengers"); // Default search
+        const savedWatchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+        setWatchlist(savedWatchlist);
     }, []);
 
     const searchMovies = async (title) => {
@@ -24,61 +28,61 @@ const App = () => {
     };
 
     const addToWatchlist = (movie) => {
-        setWatchlist([...watchlist, movie]);
-    };
-
-    const removeFromWatchlist = (movie) => {
-        setWatchlist(watchlist.filter((m) => m.imdbID !== movie.imdbID));
+        const updatedWatchlist = [...watchlist, movie];
+        setWatchlist(updatedWatchlist);
+        localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist)); // Save to localStorage
     };
 
     return (
-      <div className="app">
-          <h1 className="title">Movie Search & Recommendation</h1>
-          
-          <div className="search">
-              <input
-                  className="search-input"
-                  placeholder="Enter movie title..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <img src={SearchIcon} alt="search" onClick={() => searchMovies(searchTerm)} />
-          </div>
-  
-          <div className="main-container">
-              <div className="container">
-                  {movies.length > 0 ? (
-                      movies.map((movie) => (
-                          <MovieCard 
-                              key={movie.imdbID} 
-                              movie={movie} 
-                              addToWatchlist={() => addToWatchlist(movie)}
-                          />
-                      ))
-                  ) : (
-                      <h2>No movies found</h2>
-                  )}
-              </div>
-  
-              {watchlist.length > 0 && (
-                  <div className="watchlist">
-                      <h2>My Watchlist</h2>
-                      <div className="container">
-                          {watchlist.map((movie) => (
-                              <MovieCard 
-                                  key={movie.imdbID} 
-                                  movie={movie} 
-                                  removeFromWatchlist={() => removeFromWatchlist(movie)}
-                                  isWatchlist={true}
-                              />
-                          ))}
-                      </div>
-                  </div>
-              )}
-          </div>
-      </div>
-  );
-  
+        <Router>
+            <div className="app">
+                <h1 className="title">Movie Search & Recommendation</h1>
+
+                {/* Navigation Links */}
+                <nav>
+                    <Link to="/" className="nav-link">Home</Link>
+                    <Link to="/watchlist" className="nav-link">Watchlist</Link>
+                </nav>
+
+                <Routes>
+                    {/* Home Page */}
+                    <Route 
+                        path="/" 
+                        element={
+                            <>
+                                <div className="search">
+                                    <input
+                                        className="search-input"
+                                        placeholder="Enter movie title..."
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                    />
+                                    <img src={SearchIcon} alt="search" onClick={() => searchMovies(searchTerm)} />
+                                </div>
+
+                                <div className="container">
+                                    {movies.length > 0 ? (
+                                        movies.map((movie) => (
+                                            <MovieCard 
+                                                key={movie.imdbID} 
+                                                movie={movie} 
+                                                addToWatchlist={() => addToWatchlist(movie)}
+                                            />
+                                        ))
+                                    ) : (
+                                        <h2>No movies found</h2>
+                                    )}
+                                </div>
+                            </>
+                        } 
+                    />
+
+                    {/* Watchlist Page */}
+                    <Route path="/watchlist" element={<Watchlist watchlist={watchlist} />} />
+                </Routes>
+            </div>
+        </Router>
+    );
 };
 
 export default App;

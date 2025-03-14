@@ -1,116 +1,198 @@
-/* Reset Styles */
-* {
+/* App.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #ffffff;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Arial", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-/* Main App Container */
 .app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #121212;
-  color: white;
+  width: 90%;
+  max-width: 900px;
+  text-align: center;
   padding: 20px;
 }
 
-/* Title */
 .title {
   font-size: 2rem;
-  font-weight: bold;
   margin-bottom: 20px;
+  color: #ffcc00;
 }
 
 /* Search Bar */
 .search {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  background: #222;
+  background-color: #333;
   padding: 10px;
   border-radius: 8px;
-  width: 400px;
-  gap: 10px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 20px auto;
+  border: 2px solid #ffcc00;
 }
 
 .search-input {
   flex: 1;
-  background: none;
+  padding: 10px;
   border: none;
   outline: none;
-  color: white;
   font-size: 1rem;
-  padding: 5px;
+  background-color: #222;
+  color: white;
+  border-radius: 5px;
 }
 
 .search img {
-  width: 24px;
+  width: 30px;
+  margin-left: 10px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: transform 0.2s;
 }
 
 .search img:hover {
   transform: scale(1.1);
 }
 
-/* Layout: Movies & Watchlist */
+/* Main Content Layout */
 .main-container {
   display: flex;
-  width: 80%;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 20px;
-  margin-top: 30px;
+  align-items: center;
 }
 
-/* Movies Section */
-.movies-container {
-  flex: 3;
+/* Movie Grid Layout */
+.container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
+  justify-items: center;
+  width: 100%;
+}
+
+/* Movie Card */
+.movie {
+  background-color: #1e1e1e;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  width: 200px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.movie:hover {
+  transform: scale(1.05);
+}
+
+.movie img {
+  width: 100%;
+  height: 250px;
+  border-radius: 5px;
+}
+
+.movie span {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #ffcc00;
+}
+
+.movie h3 {
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.movie-actions {
+  margin-top: 10px;
+}
+
+.movie-actions button {
+  background-color: #ffcc00;
+  color: #121212;
+  border: none;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.movie-actions button:hover {
+  background-color: #e6b800;
 }
 
 /* Watchlist Section */
 .watchlist {
-  flex: 1;
-  background: #1a1a1a;
+  margin-top: 20px;
   padding: 15px;
+  background-color: #222;
   border-radius: 8px;
-  min-height: 400px;
+  width: 100%;
 }
 
 .watchlist h2 {
-  text-align: center;
+  color: #ffcc00;
   margin-bottom: 10px;
 }
 
-/* Movie Cards */
-.movie-card {
-  background: #222;
-  border-radius: 8px;
-  padding: 10px;
-  text-align: center;
+/* Responsive Design */
+@media (max-width: 600px) {
+  .container {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .movie {
+      width: 100%;
+  }
+
+  .search {
+      flex-direction: row;
+      width: 90%;
+  }
+}
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
-.movie-card img {
-  width: 100%;
+.nav-link {
+  text-decoration: none;
+  background-color: #ffcc00;
+  color: #121212;
+  padding: 10px 15px;
   border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.2s;
 }
 
-.movie-card button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  border: none;
-  background: #ff9800;
+.nav-link:hover {
+  background-color: #e6b800;
+}
+
+/* Back Button */
+.back-button {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #ff5733;
   color: white;
+  padding: 8px 12px;
   border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s;
+  font-weight: bold;
+  transition: background-color 0.2s;
 }
 
-.movie-card button:hover {
-  background: #e68900;
+.back-button:hover {
+  background-color: #c74427;
 }
